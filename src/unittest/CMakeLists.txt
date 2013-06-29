@@ -1,0 +1,11 @@
+add_executable(Thread_unittest Thread_unittest.cpp)
+target_link_libraries(Thread_unittest utils)
+include_directories(..)
+include_directories(../utils/)
+install(TARGETS Thread_unittest DESTINATION bin)
+
+add_executable(Buffer_unittest Buffer_unittest.cpp)
+target_link_libraries(Buffer_unittest utils)
+include_directories(..)
+include_directories(../utils/)
+install(TARGETS Buffer_unittest DESTINATION bin)

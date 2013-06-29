@@ -1,0 +1,7 @@
+cd ggc
+
+1. 编译debug版方法
+./build.sh
+2. 编译release版方法
+BUILD_TYPE=release ./build.sh
+
