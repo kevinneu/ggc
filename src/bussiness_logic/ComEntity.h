@@ -1,10 +1,13 @@
-#include <Buffer.h>
+#ifndef __COMENTITY_H_
+#define __COMENTITY_H_
+
+#include <port/Buffer.h>
 #include <utils/Mutex.h>
 #include <utils/StringPiece.h>
 #include <utils/Types.h>
 #include <utils/Logging.h>
 
-#include <Callbacks.h>
+#include <port/Callbacks.h>
 
 
 #include <boost/any.hpp>
@@ -63,8 +66,25 @@ namespace dbdky
             void send(const StringPiece& message);
             void send(Buffer* message);
             void shutdown();
-            void comDestroyed();
+            void comDestroyed(); 
+
+            void setMessageCallback(const MessageCallback& cb)
+            {
+                messageCallback_ = cb;
+            }
+
+            void setWriteCompleteCallback(const WriteCompleteCallback& cb)
+            {
+                writeCompleteCallback_ = cb;
+            }
            
+            void comEstablished();
+
+            void handleRead(Timestamp);
+            void handleWrite();
+            void handleError();
+            void handleClose();
+
 	 private:
 	     class ComUtil
              {
@@ -120,3 +140,5 @@ namespace dbdky
         };
     }
 }
+
+#endif

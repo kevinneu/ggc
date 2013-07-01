@@ -31,7 +31,7 @@ void dbdky::port::defaultConnectionCallback(const ComEntityPtr& conn)
 
 void dbdky::port::defaultMessageCallback(const ComEntityPtr&,
                                 Buffer* buf,
-                                Timestamp)
+                                Timestamp receiveTime)
 {
     buf->retrieveAll();
 }
@@ -257,8 +257,13 @@ ComEntity::ComEntity(EventLoop* loop,
     LOG_INFO << "ComEntity::ComEntity()";
     if (channel_->fd() >= 0)
     {
-        LOG_INFO << "ComEntity::ComEntity(), open serial OK.";
+        LOG_INFO << "ComEntity::ComEntity(), open serial OK. fd[" << channel_->fd() << "]";
         state_ = kOpened;
+        channel_->setReadCallback(
+            boost::bind(&ComEntity::handleRead, this, _1));
+        channel_->setWriteCallback(
+            boost::bind(&ComEntity::handleWrite, this));
+       
     }
     else
     {
@@ -268,6 +273,44 @@ ComEntity::ComEntity(EventLoop* loop,
 }
 
 ComEntity::~ComEntity()
+{
+}
+
+void ComEntity::handleRead(Timestamp receiveTime)
+{
+    loop_->assertInLoopThread();
+    int savedErrno = 0;
+    ssize_t n = inputBuffer_.readFd(channel_->fd(), &savedErrno);
+    LOG_INFO << "ComEntity::handleRead: read length[" << n << "]";
+    if (n > 0)
+    {
+        if (messageCallback_)
+        {
+            messageCallback_(shared_from_this(), &inputBuffer_, receiveTime);
+        }
+    }
+    else if (n == 0)
+    {
+        handleClose();
+    }
+    else
+    {
+        errno = savedErrno;
+        LOG_SYSERR << "ComEntity::handleRead";
+        handleError();
+    }
+}
+
+void ComEntity::handleWrite()
+{
+}
+
+            
+void ComEntity::handleError()
+{
+}
+            
+void ComEntity::handleClose()
 {
 }
 
@@ -392,5 +435,16 @@ void ComEntity::stop()
 void ComEntity::comDestroyed()
 {
     //TODO:
+    
+}
+
+void ComEntity::comEstablished()
+{
+    //TODO:
+    LOG_INFO << "ComEntity::comEstablished";
+    loop_->assertInLoopThread();
+    assert(state_ == kOpened);
+    channel_->tie(shared_from_this());
+    channel_->enableReading();
 }
 

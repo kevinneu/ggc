@@ -1,0 +1,10 @@
+include_directories(../src/include)
+include_directories(../src/port)
+include_directories(../src/functions)
+include_directories(../src/ascii)
+include_directories(../src/rtu)
+include_directories(../src/tcp)
+
+add_executable(libmodbus_unittest main.cpp)
+target_link_libraries(libmodbus_unittest modbus)
+install(TARGETS libmodbus_unittest DESTINATION bin)

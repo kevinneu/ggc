@@ -42,14 +42,13 @@ EPollPoller::~EPollPoller()
 
 Timestamp EPollPoller::poll(int timeoutMs, ChannelList* activeChannels)
 {
-    LOG_INFO << "EPollPoller::poller" << timeoutMs << ": ";
-    LOG_INFO << "epollFd_: " << epollfd_ << " events_.size() " << events_.size();
+    assert(activeChannels != NULL);
     int numEvents = ::epoll_wait(epollfd_, &*events_.begin(), static_cast<int>(events_.size()), timeoutMs);
-    LOG_INFO << "numEvents:" << numEvents;
     Timestamp now(Timestamp::now());
     if (numEvents > 0)
     {
         LOG_TRACE << numEvents << " events happended";
+        LOG_INFO << numEvents << " events happended";
         fillActiveChannels(numEvents, activeChannels);
         if (implicit_cast<size_t>(numEvents) == events_.size())
         {
@@ -58,15 +57,18 @@ Timestamp EPollPoller::poll(int timeoutMs, ChannelList* activeChannels)
     }
     else if (numEvents == 0)
     {
+        LOG_INFO << " nothing happened";
         LOG_TRACE << " nothing happended";
     }
     else
     {
+        LOG_INFO << "EPollPoller::poll()";
         LOG_SYSERR << "EPollPoller::poll()";
     }
 
     return now;
 }
+
 
 void EPollPoller::fillActiveChannels(int numEvents, ChannelList* activeChannels) const
 {
@@ -76,9 +78,10 @@ void EPollPoller::fillActiveChannels(int numEvents, ChannelList* activeChannels)
         Channel* channel = static_cast<Channel*>(events_[i].data.ptr);
 #ifndef NDEBUG
         int fd = channel->fd();
+        LOG_INFO << "fillActiveChannels: [" << i << "], fd[" << fd << "]";
         ChannelMap::const_iterator it = channels_.find(fd);
         assert(it != channels_.end());
-        assert(it->second == channel);
+        //assert(it->second == channel);
 #endif
         channel->set_revents(events_[i].events);
         activeChannels->push_back(channel);
@@ -87,19 +90,24 @@ void EPollPoller::fillActiveChannels(int numEvents, ChannelList* activeChannels)
 
 void EPollPoller::updateChannel(Channel* channel)
 {
+    LOG_INFO << "EPollPoller::updateChannel";
     Poller::assertInLoopThread();
     LOG_TRACE << "fd = " << channel->fd() << " events = " << channel->events();
     const int index = channel->index();
     if (index == kNew || index == kDeleted)
     {
+        LOG_INFO << "EPollPoller::updateChannel, index==kNew || index == kDeleted";
         int fd = channel->fd();
         if (index == kNew)
         {
+            LOG_INFO << "kNew";
             assert(channels_.find(fd) == channels_.end());
+            LOG_INFO << "channels_[" << fd << "] = channel";
             channels_[fd] == channel;
         }
         else
         {
+            LOG_INFO << "kDeleted";
             assert(channels_.find(fd) != channels_.end());
             assert(channels_[fd] == channel);
         }

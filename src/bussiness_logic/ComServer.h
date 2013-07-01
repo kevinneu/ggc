@@ -8,6 +8,8 @@
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 
+#include <RS485Codec.h>
+
 namespace dbdky
 {
     namespace port
@@ -30,10 +32,6 @@ namespace dbdky
             }
 
             void start();
-            void setConnectionCallback(const ConnectionCallback& cb)
-            {
-                connectionCallback_ = cb;
-            }
 
             void setMessageCallback(const MessageCallback& cb)
             {
@@ -45,19 +43,37 @@ namespace dbdky
                 writeCompleteCallback_ = cb;
             }
 
+            void onMessage(const ComEntityPtr& com , Buffer* buf, Timestamp time)
+            {
+            }
+
+            void onStringMessage(const ComEntityPtr&, const string& message, Timestamp)
+            {
+/*
+                for (ComEntityList::iterator itr = comEntities_.begin();
+                    itr != comEntities_.end();
+                    itr++)
+                {
+                    codec_.send(get_pointer(*itr), message);
+                }
+*/
+            }
+
+            void createComEntityAndInsert(const string& name, unsigned char dataBits, unsigned long baudRate, ComEntity::eMBParity parity);
+
         private:
             typedef std::map<string, ComEntityPtr> ComEntityMap;
             
             EventLoop* loop_;
             const string name_;
             boost::scoped_ptr<EventLoopThreadPool> threadPool_;
-            ConnectionCallback connectionCallback_;
             MessageCallback messageCallback_;
             WriteCompleteCallback writeCompleteCallback_;
             ThreadInitCallback threadInitCallback_;
             bool started_;
             int nextEntityId_;
             ComEntityMap comEntities_;
+            RS485Codec codec_;
         };
     }
 }

@@ -38,6 +38,7 @@ void Channel::tie(const boost::shared_ptr<void>& obj)
 
 void Channel::update()
 {
+    LOG_INFO << "Channel::update()";
     loop_->updateChannel(this);
 }
 
@@ -49,6 +50,7 @@ void Channel::remove()
 
 void Channel::handleEvent(Timestamp receiveTime)
 {
+    LOG_INFO << "Enter";
     boost::shared_ptr<void> guard;
     if (tied_)
     {
@@ -97,6 +99,7 @@ void Channel::handleEventWithGuard(Timestamp receiveTime)
     {
         if (readCallback_)
         {
+            LOG_INFO << "Will call readCallback";
             readCallback_(receiveTime);
         }
     }

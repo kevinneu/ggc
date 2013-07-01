@@ -5,17 +5,26 @@
 
 #include <string>
 
+#include <ComServer.h>
+#include <boost/shared_ptr.hpp>
+
+
 using namespace dbdky;
 using namespace dbdky::port;
+
 
 int main(int argc, char** argv)
 {
     LOG_INFO << "pid = " << getpid();
+    
+
     EventLoop loop;
-    //ComEntity(&loop, "/dev/ttyS0", 8, 9600, ComEntity::MB_PAR_NONE);
 
+    ComServer server(&loop, "ggc");
 
-    //ComServer.start();
+    server.createComEntityAndInsert("/dev/ttyS0", 8, 115200, ComEntity::MB_PAR_NONE);
+    server.start();
+
     loop.loop();
     return 0;
 }

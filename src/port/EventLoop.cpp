@@ -117,6 +117,7 @@ void EventLoop::loop()
             it++)
         {
             currentActiveChannel_ = *it;
+            LOG_INFO << "Will Call currentActiveChannel_::handleEvent()";
             currentActiveChannel_->handleEvent(pollReturnTime_);
         }
 
@@ -187,6 +188,7 @@ void EventLoop::cancel(TimerId timerId)
 
 void EventLoop::updateChannel(Channel* channel)
 {
+    LOG_INFO << "EventLoop::updateChannel, channel[fd" << channel->fd() << "]";
     assert(channel->ownerLoop() == this);
     assertInLoopThread();
     poller_->updateChannel(channel);
@@ -222,6 +224,7 @@ void EventLoop::wakeup()
 void EventLoop::handleRead()
 {
     //TODO:
+    LOG_INFO << "handleRead";
 }
 
 void EventLoop::doPendingFunctors()

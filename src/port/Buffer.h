@@ -5,7 +5,7 @@
 #include <utils/StringPiece.h>
 #include <utils/Types.h>
 
-#include <Endian.h>
+#include "Endian.h"
 
 #include <algorithm>
 #include <vector>
