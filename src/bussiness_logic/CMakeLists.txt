@@ -5,10 +5,11 @@ set(mainserv_SRCS
   DefaultComCodec.cpp
   RS485Codec.cpp
   IEDMgr.cpp
+  ConfigMgr.cpp
   )
 
 add_executable(mainserv ${mainserv_SRCS})
-target_link_libraries(mainserv utils port)
+target_link_libraries(mainserv utils port tinyxml)
 include_directories(.)
 include_directories(..)
 install(TARGETS mainserv DESTINATION bin)
