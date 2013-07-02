@@ -4,6 +4,7 @@ set(mainserv_SRCS
   MainService.cpp
   DefaultComCodec.cpp
   RS485Codec.cpp
+  IEDMgr.cpp
   )
 
 add_executable(mainserv ${mainserv_SRCS})

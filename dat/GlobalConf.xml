@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="gbk" ?>
+<Configs>
+    <Config-Item name="ComConfig" desc="通信端口配置" ref="RS485.xml"/>
+    <Config-Item name="DBConfig" desc="数据库配置" ref="MySQLConf.xml"/>
+    <Config-Item name="MonitorUnitConfig" desc="监测点配置" ref="ZSAR1.xml"/>
+</Configs>

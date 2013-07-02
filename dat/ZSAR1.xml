@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="gbk" ?>
+<Config-Item name="ZSAR1" desc="避雷器">
+    <MonitorUnit IEDName="MU1" interva="6000" protocol="LAmodbus" port="RS485" vendor="neri" cycleid="" mac="0x07" ytime="1" >
+    </MonitorUnit>
+</Config-Item>
+
