@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="gbk" ?>
-<Config-Item name="RS485" desc="RS485串行总线">
+<?xml version="1.0" encoding="utf-8" ?>
+<ComConfig name="RS485" desc="RS485串行总线">
     <Item name="PortName" value="/dev/ttyS0"/>
     <Item name="BaudRate" value="9600"/>
     <Item name="DataBits" value="8"/>
@@ -9,5 +9,5 @@
     <Item name="IntervalTimeOut" value="200"/>
     <Item name="InBufferSize" value="1024"/>
     <Item name="OutBufferSize" value="1024"/>
-</Config-Item>
+</ComConfig>
 

@@ -1,6 +1,12 @@
-<?xml version="1.0" encoding="gbk" ?>
-<Config-Item name="ZSAR1" desc="避雷器">
-    <MonitorUnit IEDName="MU1" interva="6000" protocol="LAmodbus" port="RS485" vendor="neri" cycleid="" mac="0x07" ytime="1" >
+<?xml version="1.0" encoding="utf-8" ?>
+<MonitorUnitConfig>
+    <MonitorUnit name="MU1" desc="" interval="6000" protocol="mLAmodbus" port="RS485" vendor="neri" cycleid="" mac="0x07" ytime="1" >
+        <MeasurePoint IEDName="SY_UDM501_C_6" deviceid="MOA0001" id="ZSAR1" chechtime="">
+            <item name="SmpTmp"/>
+            <item name="TotA"/>
+            <item name="RisA"/>
+            <item name="OpCnt"/>
+            <item name="LastOpTm"/>
+        </MeasurePoint>
     </MonitorUnit>
-</Config-Item>
-
+</MonitorUnitConfig>

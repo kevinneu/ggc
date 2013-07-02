@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by kevin (neuseeker) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="MonitorUnitConfig">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MeasurePoint" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="name"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="IEDName"/>
+						<xs:attribute name="deviceid"/>
+						<xs:attribute name="id"/>
+						<xs:attribute name="checktime"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="name"/>
+			<xs:attribute name="desc"/>
+			<xs:attribute name="interval"/>
+			<xs:attribute name="protocol"/>
+			<xs:attribute name="port"/>
+			<xs:attribute name="vendor"/>
+			<xs:attribute name="cycleid"/>
+			<xs:attribute name="mac"/>
+			<xs:attribute name="ytime"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
