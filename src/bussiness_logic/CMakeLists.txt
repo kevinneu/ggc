@@ -4,8 +4,10 @@ set(mainserv_SRCS
   MainService.cpp
   DefaultComCodec.cpp
   RS485Codec.cpp
-  IEDMgr.cpp
   ConfigMgr.cpp
+  MonitorUnitMgr.cpp
+  MeasurePoint.cpp
+  MonitorUnit.cpp
   )
 
 add_executable(mainserv ${mainserv_SRCS})
