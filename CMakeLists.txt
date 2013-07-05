@@ -38,6 +38,8 @@ find_package(Protobuf)
 
 find_library(Tinyxml REQUIRED)
 find_library(Iconv REQUIRED)
+find_library(Mysqld-dev REQUIRED)
+find_library(Mysqlclient-dev REQUIRED)
 find_library(BOOSTTEST_LIBRARY NAMES boost_unit_test_framework)
 
 include_directories(${Boost_INCLUDE_DIRS})
