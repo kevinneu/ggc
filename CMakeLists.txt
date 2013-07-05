@@ -50,6 +50,6 @@ include_directories(./src/utils)
 string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE)
 message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
 
-add_subdirectory(libmodbus)
+#add_subdirectory(libmodbus)
 add_subdirectory(src)
 #add_subdirectory(third_party)
