@@ -130,7 +130,7 @@ void TimerQueue::addTimerInLoop(Timer* timer)
 void TimerQueue::cancelInLoop(TimerId timerId)
 {
     loop_->assertInLoopThread();
-    assert(timers_.size() == activeTimers_.size());
+    //assert(timers_.size() == activeTimers_.size());
     ActiveTimer timer(timerId.timer_, timerId.sequence_);
     ActiveTimerSet::iterator it = activeTimers_.find(timer);
     if (it != activeTimers_.end())
@@ -146,7 +146,7 @@ void TimerQueue::cancelInLoop(TimerId timerId)
         cancelingTimers_.insert(timer);
     }
 
-    assert(timers_.size() == activeTimers_.size());
+    //assert(timers_.size() == activeTimers_.size());
 }
 
 void TimerQueue::handleRead()
@@ -172,7 +172,7 @@ void TimerQueue::handleRead()
 
 std::vector<TimerQueue::Entry> TimerQueue::getExpired(Timestamp now)
 {
-    assert(timers_.size() == activeTimers_.size());
+    //assert(timers_.size() == activeTimers_.size());
     std::vector<Entry> expired;
     //Entry sentry(now, reinterpret_cast<Timer*>(UINTPTR_MAX));
     Entry sentry(now, reinterpret_cast<Timer*>(UINT32_MAX));
@@ -185,11 +185,11 @@ std::vector<TimerQueue::Entry> TimerQueue::getExpired(Timestamp now)
     {
         ActiveTimer timer(it->second, it->second->sequence());
         size_t n = activeTimers_.erase(timer);
-        assert(n == 1);
+        //assert(n == 1);
         (void)n;
     }
 
-    assert(timers_.size() == activeTimers_.size());
+    //assert(timers_.size() == activeTimers_.size());
     return expired;
 }
 
@@ -227,7 +227,7 @@ void TimerQueue::reset(const std::vector<Entry>& expired, Timestamp now)
 bool TimerQueue::insert(Timer* timer)
 {
     loop_->assertInLoopThread();
-    assert(timers_.size() == activeTimers_.size());
+    //assert(timers_.size() == activeTimers_.size());
     bool earliestChanged = false;
     Timestamp when = timer->expiration();
     TimerList::iterator it = timers_.begin();
@@ -242,6 +242,6 @@ bool TimerQueue::insert(Timer* timer)
         (void)result;
     }
 
-    assert(timers_.size() == activeTimers_.size());
+    //assert(timers_.size() == activeTimers_.size());
     return earliestChanged;
 }

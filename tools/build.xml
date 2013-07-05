@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE project>
+<project basedir="./" default="dist"
+    xmlns="antlib:org.apache.tools.ant"
+    xmlns:rat="antlib:org.apache.rat.anttasks"
+    xmlns:ivy="antlib:org.apache.ivy.ant"
+    >
+    <loadproperties srcFile="build.properties" /> 
+
+    <!-- build targets -->
+    <property name="project-name" value="ggc_tools" />
+    <property name="src" value="./confvalid" />
+    <property name="tar" value="./confvalid/bin" />
+    <property name="lib" value="./confvalid/lib" />
+    <property name="jar-file-name" value="${project-name}.jar" />
+
+    <property name="src_ConfValid" value="${src}/confvalid" />
+
+
+    <target name="ConfValid" description="Validator tool for configure files">
+        <property name="ConfValid-class" value="com.dbdky.tools.ConfValid" />
+       
+        <javac srcdir="${src}" destdir="${build}" /> 
+    </target>
+
+    <target name="ConfValidDist" depends="ConfValid">
+    <mkdir dir="${dist}/lib"/>
+    <jar jarfile="${dist}/lib/ConfValid.jar" basedir="${build}" />
+    </target>
+    
+    <target name="all" depends="ConfValid">
+    </target>
+
+    <target name="prepare">
+        <mkdir dir="${tar}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${tar}"/>
+        <delete file="${jar-file-name}"/>
+    </target>
+
+    <target name="copy-res">
+        <copy todir="${tar}">
+            <fileset dir="${src}">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile" depends="clean, prepare, copy-res">
+        <javac debug="true" deprecation="true" destdir="${tar}" failonerror="true" srcdir="${src}">
+        </javac>
+    </target>
+   
+    <taskdef name="jarcp" classname="com.dbdky.tools.ConfValid"/>
+
+    <target name="class-path">
+        <jarcp lib="${lib}"/>
+    </target>
+
+    <target name="jar" depends="compile, class-path">
+        <jar basedir="${tar}" destfile="${jar-file-name}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+                <attribute name="Class-Path" value="${class-path}"/>
+            </manifest>
+        </jar> 
+    </target>
+</project>
+
