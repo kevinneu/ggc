@@ -26,12 +26,16 @@ if(CMKAE_BUILD_BITS EQUAL 32)
   list(APPEND CXX_FLAGS "-m32")
 endif()
 
-set(CMAKE_CXX_COMPILER "g++")
+#set(CMAKE_CXX_COMPILER "g++")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -finline-limit=1000 -DNDEBUG")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
+
+# Third-party related paths:
+set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
+set(MYSQL_CONNECTOR_C++_SOURCE_DIR ${THIRD_PARTY_DIR}/mysql-connector-c++-1.1.3)
 
 find_package(Boost REQUIRED)
 find_package(Protobuf)

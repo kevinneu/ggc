@@ -231,14 +231,14 @@ MESSAGE(STATUS "Configuring unit tests - statement")
 
 SET(test_uri_sources
 	${test_common_sources}
-	"${CMAKE_SOURCE_DIR}/driver/mysql_uri.cpp"
-	"${CMAKE_SOURCE_DIR}/driver/mysql_util.cpp"
+	"${MYSQL_CONNECTOR_C++_SOURCE_DIR}/driver/mysql_uri.cpp"
+	"${MYSQL_CONNECTOR_C++_SOURCE_DIR}/driver/mysql_util.cpp"
 	uri.cpp)
 
 IF(WIN32)
 	SET(test_uri_sources
     		${test_uri_sources}
-		"${CMAKE_SOURCE_DIR}/driver/mysql_uri.h"
+		"${MYSQL_CONNECTOR_C++_SOURCE_DIR}/driver/mysql_uri.h"
 		uri.h)
 ENDIF(WIN32)
 
