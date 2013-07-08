@@ -93,7 +93,10 @@ ELSE(MYSQLCPPCONN_DT_RPATH)
 
 ENDIF(MYSQLCPPCONN_DT_RPATH)
 
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/nativeapi/binding_config.h.cm ${CMAKE_CURRENT_BINARY_DIR}/nativeapi/binding_config.h)
+# chenhq
+#CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/nativeapi/binding_config.h.cm ${CMAKE_CURRENT_BINARY_DIR}/nativeapi/binding_config.h)
+
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/nativeapi/binding_config.h.cm ${CMAKE_CURRENT_SOURCE_DIR}/nativeapi/binding_config.h)
 
 SET(MYSQLCPPCONN_SOURCES
 	mysql_art_resultset.cpp
