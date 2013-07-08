@@ -18,6 +18,8 @@ namespace bussiness_logic
     typedef boost::shared_ptr<MonitorUnit> MeasureUnitPtr;
 
     typedef boost::function<void(Timestamp, string, string)> MeasurePointUpdateCallback;
+
+    typedef boost::function<void(Timestamp, const MeasureUnitPtr&)> MeasureUnitOnIntervalCallback;
 }
 }
 #endif

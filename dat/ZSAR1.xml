@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <MonitorUnitConfig>
     <MonitorUnit name="MU1" desc="" interval="6000" protocol="mLAmodbus" port="RS485" vendor="neri" cycleid="" mac="0x07" ytime="1" >
-        <MeasurePoint IEDName="SY_UDM501_C_6" deviceid="MOA0001" id="ZSAR1" chechtime="">
+        <MeasurePoint IEDName="SY_UDM501_C_6" deviceid="MOA0001" id="ZSAR1" checktime="">
             <item name="SmpTmp"/>
             <item name="TotA"/>
             <item name="RisA"/>
