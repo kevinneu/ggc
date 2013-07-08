@@ -12,14 +12,20 @@ namespace bussiness_logic
     class MeasurePoint;
     class MeasureParam;
     class MonitorUnit;
+    class ComEntity;
 
+    typedef boost::shared_ptr<ComEntity> ComEntityPtr;
     typedef boost::shared_ptr<MeasurePoint> MeasurePointPtr;
     typedef boost::shared_ptr<MeasureParam> MeasureParamPtr;
-    typedef boost::shared_ptr<MonitorUnit> MeasureUnitPtr;
+    typedef boost::shared_ptr<MonitorUnit> MonitorUnitPtr;
 
     typedef boost::function<void(Timestamp, string, string)> MeasurePointUpdateCallback;
 
-    typedef boost::function<void(Timestamp, const MeasureUnitPtr&)> MeasureUnitOnIntervalCallback;
+    typedef boost::function<void(Timestamp, const MonitorUnitPtr&)> MonitorUnitOnIntervalCallback;
+
+    typedef boost::function<void(Timestamp)> UpdateDBCallback;
+
+    typedef boost::function<void(Timestamp)> ConfigUpdateCallback;
 }
 }
 #endif

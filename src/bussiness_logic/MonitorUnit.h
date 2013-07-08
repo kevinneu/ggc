@@ -35,6 +35,7 @@ namespace bussiness_logic
           name_(name),
 	  desc_(desc),
 	  interval_(interval),
+          ts_interval_(atoll(interval_.c_str())),
 	  protocol_(protocol),
 	  port_(port),
           vendor_(vendor),
@@ -43,8 +44,6 @@ namespace bussiness_logic
           ytime_(ytime)
         {
             //TODO:
-            // If interval_ is valid, convert interval_ to ts_inerval_.
-
 
         }
 
@@ -55,16 +54,24 @@ namespace bussiness_logic
         bool isRunning() const;
       
         void setName(const string& name)
-        { name_ = name; }
+        {
+            name_ = name;
+        }
 
         string getName() const
-        { return name_; }
+        {
+	    return name_;
+	}
 
         void setDesc(const string& desc)
-        { desc_ = desc; }
+        {
+	    desc_ = desc;
+	}
      
         string getDesc() const
-        { return desc_; }
+        {
+	    return desc_;
+	}
 
         void setInterval(const string& newInterval, string& oldInterval)
         {
@@ -95,7 +102,9 @@ namespace bussiness_logic
         }
   
         string getPort() const
-        { return port_; }
+        {
+	    return port_;
+	}
 
         void setVendor(const string& vendor)
         {
@@ -137,6 +146,16 @@ namespace bussiness_logic
             return ytime_;
         }
 
+	void setMonitorUnitOnIntervalCallback(const MonitorUnitOnIntervalCallback& cb)
+        {
+            monitorUnitOnIntervalCallback_ = cb;
+        }
+
+        void setUpdateDBCallback(const UpdateDBCallback& cb)
+        {
+            updateDBCallback_ = cb;
+        }
+
     private:
         void updateInterval(const string& newInterval);
         void updateProtocol(const string& newProtocol);
@@ -156,8 +175,9 @@ namespace bussiness_logic
         EventLoop* loop_;
         dbdky::port::TimerId tInterval_;
         dbdky::Timestamp ts_interval_;
-        MeasureUnitOnIntervalCallback measurePointOnIntervalCallback_;
+        MonitorUnitOnIntervalCallback monitorUnitOnIntervalCallback_;
         MeasurePointMap measurePoints_;
+        UpdateDBCallback updateDBCallback_;
     };
 }
 }
