@@ -7,7 +7,7 @@
 
 namespace dbdky
 {
-namespace bussiness_logic
+namespace port
 {
     class MeasurePoint;
     class MeasureParam;

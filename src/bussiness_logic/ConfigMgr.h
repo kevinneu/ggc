@@ -14,7 +14,7 @@
 
 namespace dbdky
 {
-namespace bussiness_logic
+namespace port
 {
     class ComEntity;
     class MonitorUnit;
@@ -22,7 +22,7 @@ namespace bussiness_logic
     class ConfigMgr : boost::noncopyable
     {
     public:
-        typedef std::list<ComEntityPtr> ComEntityList;
+        typedef std::map<string, ComEntityPtr> ComEntityMap;
         typedef std::map<string, MonitorUnitPtr> MonitorUnitMap;
 
         ConfigMgr(const string& configPath);
@@ -37,12 +37,16 @@ namespace bussiness_logic
  
     private:
         void onUpdate(Timestamp);
+        void parseConfigFile();
+        void parseComConfig(const string& refFileName);
+        void parseDBConfig(const string& refFileName);
+        void parseMonitorUnitConfig(const string& refFileName);
 
     private:
         std::string globalConfigPath_;
         ConfigUpdateCallback configUpdateCallback_; 
 
-        ComEntityList comEntityList_;
+        ComEntityMap comEntityMap_;
         MonitorUnitMap monitorUnitMap_;
     };
 }

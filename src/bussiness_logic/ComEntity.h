@@ -18,7 +18,7 @@
 
 namespace dbdky
 {
-    namespace port
+    namespace port 
     {
         class Channel;
         class EventLoop;
@@ -29,7 +29,7 @@ namespace dbdky
         public:
             typedef enum
             {
-                MB_PAR_NONE,
+                MB_PAR_NONE = 0,
                 MB_PAR_ODD,
                 MB_PAR_EVEN
             } eMBParity;

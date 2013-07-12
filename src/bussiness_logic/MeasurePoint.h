@@ -5,11 +5,11 @@
 #include <map>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
-#include <bussiness_logic/bl_callbacks.h>
+#include <bl_callbacks.h>
 
 namespace dbdky
 {
-namespace bussiness_logic
+namespace port
 {
     class Timestamp;
     class EventLoop;

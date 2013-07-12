@@ -106,9 +106,9 @@ namespace dbdky
 
 #define LOG_WARN dbdky::Logger(__FILE__, __LINE__, dbdky::Logger::WARN).stream()
 
-#define LOG_ERROR dbdky::Logger(__FILE__, __LINE__, dbdky::Logger::ERROR).stream();
+#define LOG_ERROR dbdky::Logger(__FILE__, __LINE__, dbdky::Logger::ERROR).stream()
 
-#define LOG_FATAL dbdky::Logger(__FILE__, __LINE__, dbdky::Logger::FATAL).stream();
+#define LOG_FATAL dbdky::Logger(__FILE__, __LINE__, dbdky::Logger::FATAL).stream()
 
 #define LOG_SYSERR dbdky::Logger(__FILE__, __LINE__, false).stream()
 

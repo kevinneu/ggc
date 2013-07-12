@@ -1,7 +1,7 @@
 #include <MeasurePoint.h>
 
 using namespace dbdky;
-using namespace dbdky::bussiness_logic;
+using namespace dbdky::port;
 
 MeasurePoint::MeasurePoint()
 {
